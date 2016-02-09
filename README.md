@@ -1,6 +1,3 @@
-# vlc-random-videoclip
-A Python script that plays a videoclip in VLC chosen randomly from a subfolder. Great when having a party.
-
 # System Requirements
 This script has been tested with Python 3 and Windows 7. It also needs FFmpeg.
 
