@@ -1,0 +1,50 @@
+import random
+import time
+import subprocess
+import vlc
+import os
+
+# create list of all videos in folder 'videos'
+subfolder = "videos"
+videos = os.listdir(subfolder)
+
+# specify clip length
+intervall = 3  # seconds
+
+# setup vlc instance
+player = vlc.MediaPlayer()
+
+try:
+    print("Script running... press Ctrl+C to quit.")
+    while True:
+        # choose random file number
+        n = random.randint(0, len(videos) - 1)
+
+        # create path to current video file
+        video = os.path.join(subfolder, videos[n])
+
+        # get length of video n using ffprobe
+        ffprobe = subprocess.check_output(['ffprobe', video],
+                                          shell=True,
+                                          stderr=subprocess.STDOUT)
+
+        # calculate length of current video in seconds
+        i = ffprobe.find(bytes("Duration:", 'UTF-8'))
+        duration = ffprobe[i + 9:i + 9 + 12].decode('UTF-8').strip().split(":")
+        length = int(int(duration[0]) * 3600 +
+                     int(duration[1]) * 60 +
+                     float(duration[2])
+                     )
+
+        # create random position in video n
+        position = random.randint(0, length - intervall)
+
+        # feed player with video and position
+        player.set_mrl(video)
+        player.play()
+        player.set_time(position * 1000)
+
+        # wait till next video
+        time.sleep(intervall)
+except KeyboardInterrupt:
+    pass
