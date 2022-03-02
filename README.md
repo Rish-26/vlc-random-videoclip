@@ -4,7 +4,7 @@ This fork of the original repo adds a few features:
 3) You have the option to skip a few seconds off the start and the end of the original video so that when using movies as source clips, the intro and the end credits don't end up in the clips. Default value 0.
 
 # System Requirements
-This script has been tested with Python 3 and Windows 7 and above. It also needs FFmpeg.
+This script has been tested with Python 3, Windows 7 and 10. It also needs FFmpeg.
 
 # Installation
 * `git clone` this repo.
