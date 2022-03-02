@@ -17,8 +17,8 @@ intStart = 8
 intEnd = 20
 
 # define time to skip (in seconds) at the start and the end of the video to skip intros and end credits
-skipStart = 90
-skipEnd = 300
+skipStart = 0
+skipEnd = 0
 
 try:
     print("Script running... press Ctrl+C to quit.")
@@ -27,7 +27,6 @@ try:
     player.toggle_fullscreen()
     while True:
         intervall = random.randint(intStart,intEnd)
-        print(intervall)
         # choose random file number
         n = random.randint(0, len(videos) - 1)
 
