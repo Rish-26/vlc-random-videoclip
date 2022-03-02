@@ -8,15 +8,26 @@ import os
 subfolder = "videos"
 videos = os.listdir(subfolder)
 
-# specify clip length
-intervall = 3  # seconds
-
 # setup vlc instance
 player = vlc.MediaPlayer()
 
+# interval for the clips. It will randomly choose a clip length between intStart and intEnd
+# Enter same value for both intStart and intEnd to make the interval a single value.
+intStart = 8
+intEnd = 20
+
+# define time to skip (in seconds) at the start and the end of the video to skip intros and end credits
+skipStart = 90
+skipEnd = 300
+
 try:
     print("Script running... press Ctrl+C to quit.")
+
+    # Open player in fullscreen mode
+    player.toggle_fullscreen()
     while True:
+        intervall = random.randint(intStart,intEnd)
+        print(intervall)
         # choose random file number
         n = random.randint(0, len(videos) - 1)
 
@@ -37,7 +48,8 @@ try:
                      )
 
         # create random position in video n
-        position = random.randint(0, length - intervall)
+        position = random.randint(skipStart, (length - intervall)-skipEnd)
+
 
         # feed player with video and position
         player.set_mrl(video)
